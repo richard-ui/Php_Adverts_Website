@@ -1,0 +1,218 @@
+<?php require('template/header.phtml') ?>
+
+    <h3> Phones Page</h3>
+
+<?php
+  if(isset($Loginname)) {
+      echo "<h4 class='text-success'>Welcome $Loginname</h4>";
+  }
+  ?>
+
+    <h2 id="phoneadvertstitle" class="text-center"><u>Welcome to the Phone Adverts page!</u> </h2>
+
+
+
+ <form class="form-horizontal" role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
+    <input type="text" id="searchcss" name="searchtext" placeholder="Search for phones..." onkeyup="showHint(this.value)"/>
+
+    <input type="Submit" id="searchcss" class="btn btn-danger" name="search" value="Search"/>
+
+     <span class="glyphicon glyphicon-search" style="margin:5px"></span>
+
+     <ul class="list-group" id="txtHint"></ul>
+
+     <ul class="list-group" id="resultsSelectionBox">
+
+     </ul>
+
+</form>
+    <script>
+        function showHint(str) {
+            if (str.length == 0) {
+                document.getElementById("txtHint").innerHTML = ""; // if txtHint empty else...
+                return;
+            }
+            else {
+                var xmlhttp = new XMLHttpRequest();
+
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        //var uic = document.getElementById("txtHint");
+                        //uic.innerHTML = this.responseText;
+
+                        uic = document.getElementById("resultsSelectionBox");
+                        var names = this.responseText.split(',');
+
+                        for (var i = 0; i<names.length; i++){
+                            var opt = document.createElement('option');
+                            opt.value = names[i];
+                            opt.innerHTML = names[i];
+                            uic.appendChild(opt);
+                        }
+
+                        if (this.response != "no suggestions") {
+                            uic.innerHTML = "Suggestions:<br/>";
+                            var people = JSON.parse(this.responseText);
+                            people.forEach(function (obj) {
+                                uic.innerHTML += "<a href='productspage.php?id=" + obj.id + "'><img src='images/" + obj.image + "'>" +
+                                    obj.name + ", Price: £" + obj.price + "</a><br/>";
+                            });
+                        }
+                    }
+                };
+
+                xmlhttp.open("GET", "gethint.php?q=" + str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
+
+    <div class="dropdown-example">
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-danger">Sort By/Filters</button>
+            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-header"><strong><i>Sort By</i></strong></li>
+                <li><a href="productspage.php?sort=lowToHigh">Lowest Price</a></li>
+                <li><a href="productspage.php?sort=highToLow">Highest Price</a></li>
+                <li><a href="productspage.php?sort=name(A-Z)">Name (A-Z)</a></li>
+
+            </ul>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-danger">Sort By Brand</button>
+            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-header"><strong><i>Filters</i></strong></li>
+                <li class="dropdown-header">Brand</li>
+                <li><a href="productspage.php?filter=apple">Apple</a></li>
+                <li><a href="productspage.php?filter=Samsung">Samsung</a></li>
+                <li><a href="productspage.php?filter=Sony">Sony</a></li>
+                <li><a href="productspage.php?filter=Nokia">Nokia</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-danger">Sort By Price</button>
+            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-header"><strong><i>Filters</i></strong></li>
+                <li class="dropdown-header">Price</li>
+                <li><a href="productspage.php?filter=lessThan50">Less than  £50</a></li>
+                <li><a href="productspage.php?filter=lessThan100">Less than £100</a></li>
+                <li><a href="productspage.php?filter=lessThan150">Less than £150</a></li>
+                <li><a href="productspage.php?filter=lessThan200">Less than £200</a></li>
+                <li><a href="productspage.php?filter=lessThan350">Less than £350</a></li>
+                <li><a href="productspage.php?filter=lessThan500">Less than £500</a></li>
+                <li><a href="productspage.php?filter=lessThan600">Less than £600</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-danger">Sort By Colour</button>
+            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-header"><strong><i>Filters</i></strong></li>
+                <li class="dropdown-header">Colour</li>
+                <li><a href="productspage.php?filter=blue">Blue</a></li>
+                <li><a href="productspage.php?filter=black">Black</a></li>
+                <li><a href="productspage.php?filter=white">White</a></li>
+                <li><a href="productspage.php?filter=grey">Grey</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+
+
+
+
+<?php foreach ($view->ProductspageDataSet as $productData){ ?>
+
+<form method="post" action="watchlist.php?action=add&id=<?php echo $productData->getId() ?>">
+<?php  $_SESSION['title'] = $productData->getTitle() ?>
+    <table class="table table-hover">
+    <tr class="bg-active">
+        <th>ID</th>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
+
+
+    <tbody>
+    <?php
+        echo '<tr class="bg-danger"> <td class="text-info">' . $productData->getId() .
+            '</td> <td >' . '<img src="images/' . $productData->getImage() . '" alt="no picture" height ="130" width="80px"/>' . '
+            </td> <td>' . $productData->getTitle() . '</td>
+            </td> <td class="text-danger">£' . $productData->getPrice() . '</td>
+            <td> <input type="text" name="quantity" class="form-control" value="1" />
+            <input type="hidden" name="hidden_name" value="' .  $productData->getTitle() . ' "/>
+            <input type="hidden" name="hidden_price" value="' .  $productData->getPrice() . ' "/>
+            <input type="hidden" name="hidden_username" value="' .   $_SESSION['LoginName'] . ' "/>
+            <td><input type="submit" name="add_to_list" style="margin-top:5px;" class="btn-grad" value="Add to Watch List"/></td>
+            </tr>';
+     ?>
+    </tbody>
+    </table>
+
+
+</form>
+<?php } ?>
+
+
+<?php
+$host = 'helios.csesalford.com';
+$user = 'mvb620';
+$pass = 'muffin11//';
+$dbName = 'mvb620';
+
+$con = mysqli_connect($host, $user, $pass, $dbName);
+
+$results_per_page = 5; // 5 per page
+
+$sql = "select * from phones";
+$result = mysqli_query($con, $sql);
+$number_of_results = mysqli_num_rows($result); // calculate no. of rows
+
+$number_of_pages = ceil($number_of_results/$results_per_page); // no. of rows / 5
+
+if(!isset($_GET['page'])) {
+    $page = 1;
+}else{
+    $page = $_GET['page'];
+}
+
+
+?>
+
+    <ul class="pagination justify-content-center">
+        <?php if($page <= 1){?>
+            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li><?php
+        } else {
+            echo '<li><a href="productspage.php?page=' . ($page - 1) . '">Prev</a></li>';
+        } ?>
+        <?php
+        for($pageloop=1;$pageloop<=$number_of_pages;$pageloop++) {
+            echo '<li><a href="productspage.php?page=' . $pageloop . '">' . $pageloop . '</a></li>';
+        }
+        ?>
+        <?php if($page >= $number_of_pages){?>
+            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Next</a></li><?php
+        } else {
+            echo '<li><a href="productspage.php?page=' . ($page + 1) . '">Next</a></li>';
+        } ?>
+
+    </ul>
+
+
+
+
+
+
+<?php require('template/footer.phtml') ?>

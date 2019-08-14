@@ -1,0 +1,90 @@
+<?php require('template/header.phtml') ?>
+<h3> Google Map </h3>
+
+
+
+<div id="map" style="width: 900px; height: 500px;"></div>
+
+<style>
+    img{
+        margin-right: 5px;
+    }
+</style>
+
+
+<script>
+
+
+
+    var locations = [
+
+
+        ['<h1 id="firstHeading" class="firstHeading">Trafford Centre</h1>' +
+        '<div id="bodyContent">' +
+        '<img width="130" height="100" align="left" src="images/traffordC.jpg" alt="Mountain View"><p><b>Trafford Centre</b>, The Trafford Centre (also known as the intu Trafford Centre)[8] is a large indoor shopping centre and leisure complex in Greater Manchester, England. In the Metropolitan Borough of Trafford, the centre is close to the Trafford Park industrial estate and approximately five miles west of Manchester city centre. ' , 53.465590, -2.348213, 4],
+
+
+        ['<h1 id="firstHeading" class="firstHeading">Museum Of Science</h1>' +
+            '<div id="bodyContent">' +
+            '<img width="130"  height="100" align="left" src="images/museum.jpg" alt="Mountain View"><p><b>Museum of science</b>, A science museum is a museum devoted primarily to science. Older science museums tended to concentrate on static displays of objects related to natural history, paleontology, geology, industry and industrial machinery, etc ' , 53.477314, -2.254962, 5],
+
+            ['<h1 id="firstHeading" class="firstHeading">StretFord</h1>' +
+        '<div id="bodyContent">' +
+        '<img width="130" height="100" align="left" src="images/stretford.jpg" alt="Mountain View"><p><b>StretFord</b>, Stretford (pop. 46,910) is a town in Trafford, Greater Manchester, England. Lying on flat ground between the River Mersey and the Manchester Ship Canal, it is 3.8 miles (6.1 km) to the southwest of Manchester city centre, 3.0 miles (4.8 km) south-southwest of Salford and 4.2 miles (6.8 km) northeast of Altrincham. Stretford is contiguous with the suburb of Chorlton-cum-Hardy to the east, and the towns of Urmston to the west, Salford to the north, and Sale to the south. The Bridgewater Canal bisects the town. ' , 53.446622, -2.308713, 3]
+
+    ];
+
+
+    var map = new google.maps.Map(
+        document.getElementById('map'),   // map div
+        {
+            zoom: 10, center: new google.maps.LatLng(53.480759,-2.242631),
+            mapTypeId: google.maps.MapTypeId.ROADMAP     // center map, zoom 10
+        }
+    );
+
+
+
+    var infowindow = new google.maps.InfoWindow
+
+    var marker, i;
+    for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]), map: map
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infowindow.setContent(locations[i][0]); /* just displays place name with information about it */
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+    }
+
+
+</script>
+
+
+
+
+
+
+
+
+<?php require('template/footer.phtml') ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

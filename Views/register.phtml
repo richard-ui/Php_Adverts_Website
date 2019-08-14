@@ -1,0 +1,154 @@
+<?php require('template/header.phtml') ?>
+<h3> Register Page</h3>
+
+<form class="form-horizontal" role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
+    <div class="form-group">
+        <label for="firstname" class="col-sm-3 control-label"> Firstname: </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control"  name="firstname" placeholder="enter firstname..." value="">
+            <?php echo "<p class='text-danger'>$firstnameError</p>";?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="lastname" class="col-sm-3 control-label"> Lastname: </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control"  name="lastname" placeholder="enter lastname..." value="">
+            <?php echo "<p class='text-danger'>$lastnameError</p>";?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="password_1" class="col-sm-3 control-label"> Password: </label>
+        <div class="col-sm-4">
+            <input type="password" id="password_1" class="form-control" name="password_1" placeholder="enter password..." value="">
+            <?php echo "<p class='text-danger'>$password1Error</p>";?>
+            <div class="col-sm-12">
+            <label class="col-sm-5 control-label"> Password Strength: </label>
+                <progress max="100" value="0" id="strength" style="height:10px; color: red; width: 230px"></progress>
+                <label id="progress_lbl" style="font-size: 14px; color: red"></label>
+                <ul style="font-size: 15px">
+                        <li>Password must have 1 letter and 1 number.</li>
+                        <li>Password must also have 1 of these values, "!?@£$%^&*()".</li>
+                        <li>Password must be greater than 5.</li>
+                    </ul>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        var pass = document.getElementById("password_1");
+        pass.addEventListener('keyup', function() {
+            checkPassword(pass.value)
+        });
+        function checkPassword(password) {
+            var strengthBar = document.getElementById("strength");
+            var strength = 0;
+            if(password.match(/[a-zA-Z]+/)) {
+                strength += 1
+            }
+            if(password.match(/[0-9]+/)) {
+                strength += 1
+            }
+            if(password.match(/[!?@£$%^&*()]+/)) {
+                strength += 1
+            }
+            if(password.length > 5) {
+                strength += 1
+            }
+
+            switch(strength){
+                case 0:
+                    strengthBar.value = 0; // empty progress bar
+                    document.getElementById("progress_lbl").innerHTML = "Password Status: Weak";
+                    break;
+                case 1:
+                    strengthBar.value = 20;
+                    document.getElementById("progress_lbl").innerHTML = "Password Status: Weak";
+                    break;
+                case 2:
+                    strengthBar.value = 40;
+                    document.getElementById("progress_lbl").innerHTML = "Password Status: Medium";
+                    break;
+                case 3:
+                    strengthBar.value = 80;
+                    document.getElementById("progress_lbl").innerHTML = "Password Status: Medium";
+                    break;
+                case 4:
+                    strengthBar.value = 100;
+                    document.getElementById("progress_lbl").innerHTML = "Password Status: Strong";
+                    break;
+            }
+        }
+    </script>
+
+    <div class="form-group">
+        <label for="password_2" class="col-sm-3 control-label"> Confirm Password: </label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control"  name="password_2" placeholder="enter password..." value="">
+            <?php echo "<p class='text-danger'>$password2Error</p>";?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="col-sm-3 control-label"> Email: </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="email" placeholder="enter email..." value="">
+            <?php echo "<p class='text-danger'>$emailError</p>";?>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="address" class="col-sm-3 control-label"> Address: </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="address" placeholder="enter address..." value="">
+            <?php echo "<p class='text-danger'>$addressError</p>";?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="phone" class="col-sm-3 control-label"> Phone: </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="phone" placeholder="enter phone..." value="">
+            <?php echo "<p class='text-danger'>$phoneError</p>";?>
+        </div>
+            <em><label id="format" class="col-sm-4 control-label">Format * E.g. 034-234-7890</label></em>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-3">
+            <input id="submit" name="register" type="submit" value="Register" class="btn btn-success">
+
+            <input id="reset" name="reset" type="reset" value="Reset" class="btn btn-danger">
+        </div>
+    </div>
+</form>
+
+<p>Dont have an account? <a href="login.php">Sign in</a></p>
+
+<?php echo "<p class='text-success'>$useregister</p>";?>
+
+
+
+
+
+<?php require('template/footer.phtml') ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

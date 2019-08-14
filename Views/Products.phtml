@@ -1,0 +1,59 @@
+<?php require('template/header.phtml') ?>
+    <h3>View our Products!</h3>
+
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <br>
+
+    <table class="table table-hover">
+        <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown" name="sort">Sort By/Filters<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-header"><strong><i>Sort By</i></strong></li>
+                <li><a href="Products.php?sort=lowToHigh">Lowest Price</a></li>
+                <li><a href="Products.php?sort=highToLow">Highest Price</a></li>
+                <li><a href="Products.php?sort=name(A-Z)">Name (A-Z)</a></li>
+
+                <li class="divider"></li>
+				
+                <li class="dropdown-header"><strong><i>Filters</i></strong></li>
+                <li class="dropdown-header">Brand</li>
+                <li><a href="Products.php?filter=apple">Apple</a></li>
+                <li><a href="Products.php?filter=Samsung">Samsung</a></li>
+                <li><a href="Products.php?filter=Sony">Sony</a></li>
+                <li><a href="Products.php?filter=Nokia">Nokia</a></li>
+
+                <li class="dropdown-header">Price</li>
+                <li><a href="Products.php?filter=lessThan50">Less than £50</a></li>
+                <li><a href="Products.php?filter=lessThan100">Less than £100</a></li>
+                <li><a href="Products.php?filter=lessThan150">Less than £150</a></li>
+                <li><a href="Products.php?filter=lessThan200">Less than £200</a></li>
+                <li><a href="Products.php?filter=lessThan250">Less than £250</a></li>
+                <li><a href="Products.php?filter=lessThan300">Less than £300</a></li>
+				
+                <li class="dropdown-header">Colour</li>
+                <li><a href="Products.php?filter=blue">Blue</a></li>
+                <li><a href="Products.php?filter=black">Black</a></li>
+                <li><a href="Products.php?filter=white">White</a></li>
+                <li><a href="Products.php?filter=grey">Grey</a></li>
+            </ul>
+        </div>
+
+        <tr>
+             <th>ID</th>
+             <th>Image</th>
+             <th>Title</th>
+             <th>Price</th>
+        </tr>
+
+    <tbody>
+        <?php foreach ($view->ProductsDataSet as $productData) {
+        echo '<tr> <td>' . $productData->getId() .
+            '</td> <td>' . '<img src="images/' . $productData->getImage() . '" alt="no picture" height ="130" width="80px"/>' . '
+            </td> <td>' . $productData->getTitle() . '</td> 
+            </td> <td>' . '£' . $productData->getPrice() . '</td> 
+            </tr>';
+        } ?>
+    </tbody>
+    </table>
+</form>
+<?php require('template/footer.phtml') ?>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/my-style.css" rel="stylesheet">
+
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcFP33eq338r02S4F8SK39-HMpD-L0k98&callback=initMap">
+    </script>
+
+    <title> Server-Side Programming - <?php echo $view->pageTitle; ?></title>
+</head>
+
+<body role="document">
+
+<div class="container">
+    <!-- navbar 2 !-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index.php">Home</a></li>
+                <li><a href="productspage.php">Products</a></li>
+                <li><a href="watchlist.php">Watch list</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="locations.php"><span class="glyphicon glyphicon-log-in"></span> locations </a></li>
+
+            </ul>
+        </div>
+    </nav>
+   <!-- class="col-xs-7 col-sm-10 col-md-12"!-->
+
+    <div id="content" >
+

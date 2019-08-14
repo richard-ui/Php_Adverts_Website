@@ -1,0 +1,98 @@
+<?php require('template/header.phtml') ?>
+<h3> Post Page</h3>
+
+
+
+<form class="form-horizontal" role="form" enctype="multipart/form-data" action="postAdverts.php" method="POST">
+
+
+    <div class="form-group">
+        <label for="advertid" class="col-sm-2 control-label"> Enter ID: </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="advertid" placeholder="enter ID..." value="">
+            <?php echo "<p class='text-danger'>$advertidError</p>";?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label"> Enter Title: </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control"  name="title" placeholder="enter Title..." value="">
+            <?php echo "<p class='text-danger'>$titleError</p>";?>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="price" class="col-sm-2 control-label"> Enter Price: </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control"  name="price" placeholder="enter Price..." value="">
+            <?php echo "<p class='text-danger'>$priceError</p>";?>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="colour" class="col-sm-2 control-label"> Select Colour: </label>
+        <div class="col-sm-4">
+            <select name="colour">
+                <option value="Blue">Blue</option>
+                <option value="Grey">Grey</option>
+                <option value="White">White</option>
+                <option value="Black">Black</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="colour" class="col-sm-2 control-label"> Select BrandName: </label>
+        <div class="col-sm-4">
+            <select name="brandname">
+                <option value="Sony">Sony</option>
+                <option value="Apple">Apple</option>
+                <option value="Nokia">Nokia</option>
+                <option value="Samsung">Samsung</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="upload" class="col-sm-2 control-label"> Select File to Upload: </label>
+        <div class="col-sm-4">
+            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+            <input name="userfile" type="file" />
+        </div>
+    </div>
+
+
+    <?php echo "<p class='text-danger'>$filemessage</p>";?>
+
+    <?php echo "<p class='text-info'>$postedAdvert</p>";?>
+
+    <input id="submit" name="postad" type="submit" value="Upload" class="btn btn-success">
+
+
+</form>
+
+
+
+
+
+<?php require('template/footer.phtml') ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
