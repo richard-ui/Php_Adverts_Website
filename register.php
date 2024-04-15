@@ -7,7 +7,7 @@ require_once('Models/registerDataSet.php');
 
 $firstnameError = "";
 $lastnameError = "";
-$password1Error = "";              // error variables will start as null
+$password1Error = "";
 $password2Error = "";
 $emailError = "";
 $addressError = "";
@@ -17,15 +17,13 @@ $useregister = "";
 
 if(isset($_POST['firstname']) && isset($_POST['email']) && isset($_POST['phone'])) {
     $firstname = ($_POST["firstname"]);
-//$password1 = ($_POST["password"]);
     $email = ($_POST["email"]);
-//$address = ($_POST["address"]);
     $phone = ($_POST["phone"]);
 }
 
 $errors = array();         // array that will gather errors
 
-$registerDataSet = new registerDataSet();             // gathers dataset class
+$registerDataSet = new registerDataSet();
 
 // On submitting form below function will execute.
 if(isset($_POST['register'])) {
