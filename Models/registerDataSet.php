@@ -19,7 +19,7 @@ class registerDataSet {
         $sqlquery = "INSERT INTO userinfo (firstname, lastname, password, email, address, phone) VALUES ('" . $_POST["firstname"] . "','" . $_POST["lastname"] . "','" . $password . "','" . $_POST["email"] . "','" . $_POST["address"] . "','" . $_POST["phone"] . "')";
 
         $statement = $this->_dbHandle->prepare($sqlquery);
-        $statement->execute();    // run statement
+        $statement->execute();
 
     }
 }

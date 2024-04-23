@@ -73,20 +73,16 @@ class ProductspageDataSet
 
 
 
-    public function searchProducts($search)              // function to display products from phones table
+    public function searchProducts($search)
     {
-        // $search = $_POST['searchtext'];
         $sqlQuery = "SELECT * from phones where phones.Title like '%" .  $search . "%'";
-
-
-        $statement = $this->_dbHandle->prepare($sqlQuery);           // prepares query
-        $statement->execute(); // execute the PDO statement
-
+        $statement = $this->_dbHandle->prepare($sqlQuery);
+        $statement->execute();
         $dataSet = [];
-        while ($row = $statement->fetch()) {                        // while loop to loop through rows
+        while ($row = $statement->fetch()) {
             $dataSet[] = new ProductspageData($row);
         }
-        return $dataSet;                                  // return dataset
+        return $dataSet;
     }
 
 
@@ -126,11 +122,11 @@ class ProductspageDataSet
         $sqlQuery = "SELECT * from phones where phones.Title like '%" .  $searchtext . "%'";
 
 
-        $statement = $this->_dbHandle->prepare($sqlQuery);           // prepares query
-        $statement->execute(); // execute the PDO statement
+        $statement = $this->_dbHandle->prepare($sqlQuery);
+        $statement->execute();
 
         $dataSet = [];
-        while ($row = $statement->fetch()) {                        // while loop to loop through rows
+        while ($row = $statement->fetch()) {
             $dataSet[] = new ProductspageData($row);
         }
         return $dataSet;
@@ -192,7 +188,7 @@ class ProductspageDataSet
 //        return $dataSet;
     }
 
-    public function products_FK()
+    public function addPhoneIntoWatchList()
     {
         $sqlQuery = "select phones.id, phones.Image, phones.Title, phones.Price, userinfo.firstname
                     from phones

@@ -19,27 +19,12 @@ class watchlistDataSet {
             $statement->execute();    // run statement
     }
 
-    public function products_FK($watchlist_id, $username, $title)
+    public function addPhoneIntoWatchList($watchlist_id, $username, $title)
     {
         $sqlQuery = "INSERT INTO watchlist (watchlistid, username, title)
                      VALUES ('$watchlist_id', '$username', '$title')";
 
-        $statement = $this->_dbHandle->prepare($sqlQuery);           // prepares query
-        $statement->execute(); // execute the PDO statement
-
-    }
-    ///
-    ///
-    ///
-    
-	 public function insertinto()          
-    {
-         $phoneID = $_GET['id'];
-
-         $sqlQuery = "INSERT INTO phones(id) VALUES('$phoneID')";
-
-
         $statement = $this->_dbHandle->prepare($sqlQuery);
-        $statement->execute();    // run statement
+        $statement->execute();
     }
 }

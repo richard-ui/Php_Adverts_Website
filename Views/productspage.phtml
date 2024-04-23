@@ -1,36 +1,35 @@
 <?php require('template/header.phtml') ?>
 
-    <h3> Phones Page</h3>
+    <h3> Phones Page </h3>
 
-<?php
-  if(isset($Loginname)) {
-      echo "<h4 class='text-success'>Welcome $Loginname</h4>";
-  }
-  ?>
+    <?php
+    if(isset($Loginname)) {
+        echo "<h4 class='text-success'>Welcome $Loginname</h4>";
+    }
+    ?>
 
     <h2 id="phoneadvertstitle" class="text-center"><u>Welcome to the Phone Adverts page!</u> </h2>
 
+    <form class="form-horizontal" role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 
+        <input type="text" id="searchcss" name="searchtext" placeholder="Search for phones..." onkeyup="showHint(this.value)"/>
 
- <form class="form-horizontal" role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <input type="Submit" id="searchcss" class="btn btn-danger" name="search" value="Search"/>
 
-    <input type="text" id="searchcss" name="searchtext" placeholder="Search for phones..." onkeyup="showHint(this.value)"/>
+        <span class="glyphicon glyphicon-search" style="margin:5px"></span>
 
-    <input type="Submit" id="searchcss" class="btn btn-danger" name="search" value="Search"/>
+        <ul class="list-group" id="txtHint"></ul>
 
-     <span class="glyphicon glyphicon-search" style="margin:5px"></span>
+        <ul class="list-group" id="resultsSelectionBox">
 
-     <ul class="list-group" id="txtHint"></ul>
+        </ul>
 
-     <ul class="list-group" id="resultsSelectionBox">
+    </form>
 
-     </ul>
-
-</form>
     <script>
         function showHint(str) {
             if (str.length == 0) {
-                document.getElementById("txtHint").innerHTML = ""; // if txtHint empty else...
+                document.getElementById("txtHint").innerHTML = "";
                 return;
             }
             else {
@@ -38,9 +37,6 @@
 
                 xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        //var uic = document.getElementById("txtHint");
-                        //uic.innerHTML = this.responseText;
-
                         uic = document.getElementById("resultsSelectionBox");
                         var names = this.responseText.split(',');
 
@@ -126,14 +122,8 @@
 
     </div>
 
-
-
-
-
 <?php foreach ($view->ProductspageDataSet as $productData){ ?>
-
 <form method="post" action="watchlist.php?action=add&id=<?php echo $productData->getId() ?>">
-<?php  $_SESSION['title'] = $productData->getTitle() ?>
     <table class="table table-hover">
     <tr class="bg-active">
         <th>ID</th>
@@ -144,52 +134,25 @@
         <th></th>
     </tr>
 
-
     <tbody>
-    <?php
-        echo '<tr class="bg-danger"> <td class="text-info">' . $productData->getId() .
-            '</td> <td >' . '<img src="images/' . $productData->getImage() . '" alt="no picture" height ="130" width="80px"/>' . '
-            </td> <td>' . $productData->getTitle() . '</td>
-            </td> <td class="text-danger">£' . $productData->getPrice() . '</td>
-            <td> <input type="text" name="quantity" class="form-control" value="1" />
-            <input type="hidden" name="hidden_name" value="' .  $productData->getTitle() . ' "/>
-            <input type="hidden" name="hidden_price" value="' .  $productData->getPrice() . ' "/>
-            <input type="hidden" name="hidden_username" value="' .   $_SESSION['LoginName'] . ' "/>
-            <td><input type="submit" name="add_to_list" style="margin-top:5px;" class="btn-grad" value="Add to Watch List"/></td>
-            </tr>';
-     ?>
+        <tr class="bg-danger">
+            <td width="20%" class="text-info"><?php echo $productData->getId() ?></td>
+            <td width="20%"><img src="images/<?php echo $productData->getImage() ?>" alt="no picture" width="50%"/></td>
+            <td width="20%"><?php echo $productData->getTitle() ?></td>
+            <td width="20%" class="text-danger">£<?php echo $productData->getPrice() ?></td>
+            <td width="20%"><input type="text" name="quantity" class="form-control" value="1" /></td>
+            <input type="hidden" name="hidden_name" value="<?php echo $productData->getTitle() ?>"/>
+            <input type="hidden" name="hidden_price" value="<?php echo $productData->getPrice() ?>"/>
+            <?php if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']) { ?>
+                <td><input type="submit" name="add_to_list" style="margin-top:5px;" class="btn-watch" value="Add to Watch List"/></td>
+            <?php } ?>
+        </tr>
     </tbody>
     </table>
 
 
 </form>
 <?php } ?>
-
-
-<?php
-$host = 'helios.csesalford.com';
-$user = 'mvb620';
-$pass = 'muffin11//';
-$dbName = 'mvb620';
-
-$con = mysqli_connect($host, $user, $pass, $dbName);
-
-$results_per_page = 5; // 5 per page
-
-$sql = "select * from phones";
-$result = mysqli_query($con, $sql);
-$number_of_results = mysqli_num_rows($result); // calculate no. of rows
-
-$number_of_pages = ceil($number_of_results/$results_per_page); // no. of rows / 5
-
-if(!isset($_GET['page'])) {
-    $page = 1;
-}else{
-    $page = $_GET['page'];
-}
-
-
-?>
 
     <ul class="pagination justify-content-center">
         <?php if($page <= 1){?>
@@ -209,10 +172,5 @@ if(!isset($_GET['page'])) {
         } ?>
 
     </ul>
-
-
-
-
-
 
 <?php require('template/footer.phtml') ?>

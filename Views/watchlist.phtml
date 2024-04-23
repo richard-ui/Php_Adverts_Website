@@ -1,13 +1,6 @@
 <?php require('template/header.phtml') ?>
     <h3> Watch List </h3>
 
-
-    <?php $number = 2 ?>
-
-<form method="post" action="watchlist.php?action=add&id=<?php echo $number ?>">
-    <input type="submit" name="add_to_watchlist" style="margin-top:5px;" class="btn-grad" value="Add to Watch List 1"/>
-</form>
-
     <div class="table-responsive">
         <table class="table table-bordered">
             <tr>
@@ -47,23 +40,14 @@
         </table>
     </div>
 
-
-
-
-
-
-<form class="form-horizontal" role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <form class="form-horizontal" role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <div class="form-group">
         <div class="col-sm-4 ">
             <input id="back" name="adverts" type="submit" value="Back" class="btn btn-warning">
             <input id="logout" type="submit" name="logout" style="margin-top:5px;" class="btn btn-danger" value="Logout"/>
-            <a href="postAdverts.php">Post Adverts?</a>
+            <a href="postAdverts.php">Post An Advert?</a>
         </div>
     </div>
-</form>
-
-
-
-
+    </form>
 
 <?php require('template/footer.phtml') ?>

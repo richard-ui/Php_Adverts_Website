@@ -11,14 +11,14 @@ class watchlistData {
         $this->_advertname = $dbRow['advert_name'];
     }
 
-    public function getId() {                      // public methods
+    public function getId() {
         return $this->_watchlistid;
     }
 
     public function getPhone() {
         return $this->_phoneswatchlistid;
     }
-    public function getUser() {                      // public methods
+    public function getUser() {
         return $this->_user;
     }
 

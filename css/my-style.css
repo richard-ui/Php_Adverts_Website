@@ -2,7 +2,6 @@
     margin-top: 12px;
     background-color: #fff;
     color: #000;
-
 }
 #menu {
     border-top: solid 6px #f00;
@@ -11,7 +10,6 @@
     height: 700px;
 
 }
-
 #menu a {
     background-color: lime;
     color: black;
@@ -22,16 +20,10 @@
     margin-bottom: 10px;
 
 }
-.united{
-    width:150px;
-}
 .hidden{
     display: none;
 }
 
-#submit1{
-
-}
 #menu a:hover {
     background-color: yellow;
     color: black;
@@ -45,9 +37,8 @@ a{
 #content {
     background-color: #fff;
     border-top: solid 6px #f00;
-
+    padding: 10px;
 }
-
 #footer {
     margin-top: 20px;
     text-align: center;
@@ -64,24 +55,14 @@ label{
 .lbl{
     color: red;
 }
-.table-hover{
-
-}
-.btn-sub{
-   background-color:lime;
-}
-.btn-res{
-    background-color: red;
-}
 form{
     margin:auto;
-
     padding:5px;
 }
 body{
     background: linear-gradient(to bottom right, red, yellow);
     font-size: 25px;
-font-family: TakaoPGothic;
+    font-family: TakaoPGothic;
 }
 .error{
     color: red;
@@ -89,42 +70,28 @@ font-family: TakaoPGothic;
 td{
     padding: 25px;
 }
-table{
-
-}
 .mainpics{
     width: 552px;
     height: 450px;
 }
-.btn-grad {
-    background-image: linear-gradient(to bottom right, red, yellow);
+.btn-watch {
+    background-image: #fff;
     color: black;
     font-size: 20px;
 
 }
-
-#content{
-    padding: 10px;
-}
 #searchcss{
     font-size: 20px;
 }
-
 .btn-group{
-       margin-left: 100px;
+    margin-left: 100px;
 }
-
 nav{
-    font-size: 30px;
+    font-size: 25px;
 }
-
-
-
-
 
 
 @media screen  and (max-width:480px) {
-
     .mainpics {
         width: 100%;
         height: 250px;
@@ -156,74 +123,33 @@ nav{
 
     #format {
         width: 100%;
-
-
     }
     .btn-group {
         margin: auto;
         width: 100%;
         border: 3px solid red;
         padding: 10px;
-
-
     }
-
-    .containertable {
-        width: 100%;
-    }
-
     h3 {
         text-align: center;
     }
-
     #phoneadvertstitle {
         font-size: 20px;
     }
-
     table, tbody, td, tr {
         display: block;
     }
-th{
-    visibility: hidden;
-}
+    th{
+        visibility: hidden;
+    }
     tr {
         border: 1px solid #ccc;
     }
-    /*th{
-        visibility: hidden;
-    }*/
-
-    #back {
+    #back, #logout, #filter {
         display: block;
         margin: 0 auto;
     }
-
-    #logout {
-        display: block;
-        margin: 0 auto;
-    }
-    #filter{
-        display: block;
-        margin: 0 auto;
-    }
-    #tableid
-    {
-        width: 100%;
-        overflow-y: auto;
-        _overflow: auto;
-        margin: 0 0 1em;
-    }
-    #changepasswordlbls {
-        width: 300px;
-    }
-
 }
-
-
-
-
-
-
 
 @media screen and (max-width: 1000px) and (min-width: 500px) {
     nav {

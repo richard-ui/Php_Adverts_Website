@@ -1,10 +1,3 @@
 <?php
-$view = new stdClass();
-$view->pageTitle = 'Homepage';
-
-// $host = 'localhost';
-// $user = 'root';
-// $pass = '';
-// $dbName = 'ricksDatabase';
-
+session_start();
 require_once('Views/index.phtml');

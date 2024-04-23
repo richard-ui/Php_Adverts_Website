@@ -1,9 +1,7 @@
 <?php
-$view = new stdClass();
-$view->pageTitle = 'Register';
-
+session_start();
 require_once('Models/registerDataSet.php');
-
+$registerDataSet = new registerDataSet();
 
 $firstnameError = "";
 $lastnameError = "";
@@ -21,33 +19,26 @@ if(isset($_POST['firstname']) && isset($_POST['email']) && isset($_POST['phone']
     $phone = ($_POST["phone"]);
 }
 
-$errors = array();         // array that will gather errors
+$errors = array();
 
-$registerDataSet = new registerDataSet();
-
-// On submitting form below function will execute.
 if(isset($_POST['register'])) {
 
     if (empty($_POST["firstname"])) {
         array_push($errors, 1);
         $firstnameError = "FirstName is required";
     }
-
     if (empty($_POST["lastname"])) {
         array_push($errors, 1);
         $lastnameError = "LastName is required";
     }
-                                                                 // check name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z ]*$/", $firstname)) {
         array_push($errors, 2);
         $firstnameError = "Only letters and white space allowed";
     }
-
     if(empty($_POST["password_1"])){
         array_push($errors, 3);
         $password1Error = "Password required";
     }
-
     if(empty($_POST["password_2"])){
         array_push($errors, 4);
         $password2Error = "Password required";
@@ -60,7 +51,7 @@ if(isset($_POST['register'])) {
         array_push($errors, 6);
         $emailError = "Email is required";
     }
-    if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)) {          // check email right format
+    if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)) {
         array_push($errors, 7);
         $emailError = "Invalid email format!";
     }
@@ -72,7 +63,7 @@ if(isset($_POST['register'])) {
         array_push($errors, 9);
         $phoneError = "Phone No* is required";
     }
-    if(!preg_match('/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/', $phone)) {         // phone must be format of 3-3-4 e.g. 076-576-3456
+    if(!preg_match('/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/', $phone)) {
         array_push($errors, 10);
         $phoneError = "Invalid Phone No*";
     }
@@ -100,7 +91,5 @@ if(isset($_POST['register'])) {
         $registerDataSet->signupuser();
     }
 }
-
-
 
 require_once('Views/register.phtml');

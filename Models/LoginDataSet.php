@@ -11,12 +11,12 @@ class LoginDataSet {
         $this->_dbHandle = $this->_dbInstance->getdbConnection();
     }
 
-    public function login($u_name,$u_password){ // function to gather and authenticate users username and password
+    public function login($u_name,$u_password){
 
 
         $sqlQuery = "select email from userinfo WHERE email = '$u_name' AND password = '$u_password'";
-        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
-        $statement->execute(); // execute the PDO statement
+        $statement = $this->_dbHandle->prepare($sqlQuery);
+        $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
     }

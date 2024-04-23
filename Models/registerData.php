@@ -1,11 +1,10 @@
 <?php
 
-class registerData {                             // register data class
+class registerData {
 
     protected $_u_firstname, $_u_lastname, $_u_password, $_u_email, $_u_address, $_u_phone;          // protected register variables
 
     public function __construct($dbRow) {
-        // gathers rows from database
         $this->_u_firstname = $dbRow['firstname'];
         $this->_u_lastname = $dbRow['lastname'];
         $this->_u_password = $dbRow['password'];
@@ -14,10 +13,10 @@ class registerData {                             // register data class
         $this->_u_phone = $dbRow['phone'];
     }
 
-    public function getFirstName() {                      // public methods
+    public function getFirstName() {
         return $this->_u_firstname;
     }
-    public function getLastName() {                      // public methods
+    public function getLastName() {
         return $this->_u_lastname;
     }
 

@@ -11,11 +11,10 @@ class changepasswordDataSet {
         $this->_dbHandle = $this->_dbInstance->getdbConnection();
     }
 
-    public function changePW() // function to change password
+    public function changePW()
     {
         $username = $_POST['username'];
         $newpassword = $_POST['newpass'];
-        //$encryptpassword = md5($newpassword);
 
          $sqlquery = "UPDATE userinfo SET password='$newpassword' where email='$username'"; // updates the password when username equals posted username
 		 $statement = $this->_dbHandle->prepare($sqlquery);

@@ -17,8 +17,11 @@ class LocationDataSet {
         $sqlQuery = "SELECT phones.Title, Locations.idLocations, Locations.City, Locations.Lat, Locations.`long`, Locations.CenterLat, Locations.CenterLong
         FROM phones
         INNER JOIN Locations on phones.locID = Locations.idLocations
-        "; // inner join binds only primary key and foreign key together
-
+        ";
+        // $sqlQuery = "SELECT phones.Title, Locations.idLocations, Locations.City, Locations.Lat, Locations.`long`, Locations.CenterLat, Locations.CenterLong
+        // FROM phones
+        // INNER JOIN Locations on Locations.phone_FK = phones.id
+        // ";
         $statement = $this->_dbHandle->prepare($sqlQuery);           // prepares query
         $statement->execute(); // execute the PDO statement
 
