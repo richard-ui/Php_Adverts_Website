@@ -1,0 +1,69 @@
+<?php require('template/header.phtml') ?>
+    <h3> Shopping Cart </h3>
+
+    <?php
+        if(isset($_SESSION["cart"]) && !empty($_SESSION["cart"])){
+            $total_price = 0;
+        ?>	
+    <div class="table-responsive" id="cart">
+        <table class="table table-bordered">
+            <tr>
+                <th width="20%">ITEM NAME</th>
+                <th width="10%">QUANTITY</th>
+                <th width="20%">UNIT PRICE</th>
+                <th width="15%">ITEMS TOTAL</th>
+                <th width="5%"></th>
+            </tr>
+            <?php
+            if(!empty($_SESSION["cart"])) {
+                $total = 0;
+                foreach($_SESSION["cart"] as $key => $value)
+                {
+                    ?>
+                    <tr>
+                        <td><?php echo $value["item_name"]; ?></td>
+                        <td><?php echo $value["item_quantity"]; ?></td>
+                        <td>£ <?php echo $value["item_price"]; ?></td>
+                        <td>£ <?php echo number_format($value["item_quantity"] * $value["item_price"], 2); ?></td>
+                        <td><a href="cart.php?action=delete&id=<?php echo $value["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+                    </tr>
+                    <?php
+                    $total = $total + ($value["item_quantity"] * $value["item_price"]);
+                }
+                ?>
+                <tr>
+                    <td colspan="3" align="right">Total</td>
+                    <td align="right">£ <?php echo number_format($total, 2); ?></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                    <td align="right">
+                        <form class="form-horizontal" role="form" method="post" action="checkout.php">
+                            <input id="payBtn" name="payBtn" type="submit" value="Pay Now" class="btn btn-success">
+                        </form>
+                    </td>
+                    <td></td>
+                </tr>
+                <?php
+            }
+            ?>
+        </table>	
+        <?php
+            } else{
+                echo "<h4>Your cart is empty!</h4>";
+            }
+        ?>
+
+        <form class="form-horizontal" role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <input id="back" name="adverts" type="submit" value="Back" class="btn btn-warning">
+                    <input id="logout" type="submit" name="logout" class="btn btn-danger" value="Logout"/>
+                    <a href="postAdverts.php">Post An Advert?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<?php require('template/footer.phtml') ?>

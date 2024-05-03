@@ -13,16 +13,26 @@ class ProductspageDataSet
         $this->_dbHandle = $this->_dbInstance->getdbConnection();
     }
 
-// this gets the products data from the database
-    public function fetchAllProducts()              // function to display products from phones table
-    {
+    public function countProducts() {
         $sqlQuery = 'SELECT * FROM phones';
-        if(isset($_GET['sort']) || isset($_GET['filter'])) {
 
+        $statement = $this->_dbHandle->prepare($sqlQuery);           // prepares query
+        $statement->execute(); // execute the PDO statement
+
+        $dataSet = [];
+        while ($row = $statement->fetch()) {                        // while loop to loop through rows
+            $dataSet[] = new ProductspageData($row);
+        }
+        return count($dataSet);
+    }
+
+    public function fetchAllProducts($start_from, $num_per_page) {
+        $sqlQuery = "SELECT * FROM phones LIMIT " . $start_from . ", " . $num_per_page . "";
+        if(isset($_GET['sort']) || isset($_GET['filter'])) {
             if ($_GET['sort'] == "lowToHigh") {
-                $sqlQuery .= " ORDER BY Price ASC"; //this filters it by price ascending
+                $sqlQuery .= " ORDER BY Price ASC";
             } elseif ($_GET['sort'] == "highToLow") {
-                $sqlQuery .= " ORDER BY Price DESC"; //this filters it by price descending
+                $sqlQuery .= " ORDER BY Price DESC";
             } elseif ($_GET['sort'] == "name(A-Z") {
                 $sqlQuery .= " ORDER BY Title ASC"; //this filters it by name descending
             } elseif ($_GET['filter'] == "lessThan50") {
@@ -61,20 +71,17 @@ class ProductspageDataSet
                 $sqlQuery = 'SELECT * FROM phones';                      // else display all phones from table
             }
         }
-        $statement = $this->_dbHandle->prepare($sqlQuery);           // prepares query
-        $statement->execute(); // execute the PDO statement
+        $statement = $this->_dbHandle->prepare($sqlQuery);
+        $statement->execute();
 
         $dataSet = [];
-        while ($row = $statement->fetch()) {                        // while loop to loop through rows
+        while ($row = $statement->fetch()) {
             $dataSet[] = new ProductspageData($row);
         }
-        return $dataSet;                                  // return dataset
+        return $dataSet;
     }
-
-
-
-    public function searchProducts($search)
-    {
+    
+    public function searchProducts($search) {
         $sqlQuery = "SELECT * from phones where phones.Title like '%" .  $search . "%'";
         $statement = $this->_dbHandle->prepare($sqlQuery);
         $statement->execute();
@@ -85,24 +92,7 @@ class ProductspageDataSet
         return $dataSet;
     }
 
-
-    public function fetchLocations()
-    {
-        $sqlQuery = 'SELECT * FROM phones';
-
-        $statement = $this->_dbHandle->prepare($sqlQuery);
-        $statement->execute();
-
-        $dataSet = [];
-        while ($row = $statement->fetch()) {
-            $dataSet[] = new LocationData($row);
-        }
-        return $dataSet;
-    }
-
-
-    public function fetchAjaxHintID($ajaxid)
-    {
+    public function fetchAjaxHintID($ajaxid) {
         $sqlQuery = "SELECT * FROM phones where id = '$ajaxid'";
 
         $statement = $this->_dbHandle->prepare($sqlQuery);
@@ -115,9 +105,7 @@ class ProductspageDataSet
         return $dataSet;
     }
 
-
-    public function searchtextforAjax($searchtext)
-    {
+    public function searchtextforAjax($searchtext) {
 
         $sqlQuery = "SELECT * from phones where phones.Title like '%" .  $searchtext . "%'";
 
@@ -127,79 +115,6 @@ class ProductspageDataSet
 
         $dataSet = [];
         while ($row = $statement->fetch()) {
-            $dataSet[] = new ProductspageData($row);
-        }
-        return $dataSet;
-    }
-
-    public function productsPaginate()
-    {
-        $results_per_page = 5;
-
-        //$number_of_results = "select COUNT(*) from phones";
-
-        //$number_of_pages = ceil($number_of_results / $results_per_page);
-
-        if(!isset($_GET['page'])){
-            $page = 1;
-        }
-        else {
-        $page = $_GET['page'];
-        }
-
-        $this_page_first_result = ($page-1)*$results_per_page;
-
-        $sqlQuery = "select * from phones LIMIT  " . $this_page_first_result. ',' . $results_per_page;
-
-//        for($page=1;$page<=$number_of_pages;$page++){
-//            echo '<a href="productspage.php?page=' . $page . '">' . $page . '</a> ';
-//        }
-
-        $statement = $this->_dbHandle->prepare($sqlQuery);           // prepares query
-        $statement->execute(); // execute the PDO statement
-
-        $dataSet = [];
-        while ($row = $statement->fetch()) {                        // while loop to loop through rows
-            $dataSet[] = new ProductspageData($row);
-        }
-        return $dataSet;
-    }
-
-    public function productsPaginateCount()
-    {
-        $results_per_page = 5;
-
-        $sqlQuery = "select COUNT(*) from phones";
-
-       // $number_of_pages = ceil($sqlQuery / $results_per_page);
-
-        // phtml
-//        for($page=1;$page<=$number_of_pages;$page++){
-//            echo '<a href="productspage.php?page=' . $page . '">' . $page . '</a> ';
-//        }
-
-        $statement = $this->_dbHandle->prepare($sqlQuery);           // prepares query
-        $statement->execute(); // execute the PDO statement
-//
-//        $dataSet = [];
-//        while ($row = $statement->fetch()) {                        // while loop to loop through rows
-//            $dataSet[] = new ProductspageData($row);
-//        }
-//        return $dataSet;
-    }
-
-    public function addPhoneIntoWatchList()
-    {
-        $sqlQuery = "select phones.id, phones.Image, phones.Title, phones.Price, userinfo.firstname
-                    from phones
-                    LEFT JOIN userinfo on phones.id = userinfo.userkey
-                    ";
-
-        $statement = $this->_dbHandle->prepare($sqlQuery);           // prepares query
-        $statement->execute(); // execute the PDO statement
-
-        $dataSet = [];
-        while ($row = $statement->fetch()) {                        // while loop to loop through rows
             $dataSet[] = new ProductspageData($row);
         }
         return $dataSet;

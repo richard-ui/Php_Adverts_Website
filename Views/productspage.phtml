@@ -64,113 +64,103 @@
         }
     </script>
 
-    <div class="dropdown-example">
+    <div class="dropdown">
 
         <div class="btn-group">
             <button type="button" class="btn btn-danger">Sort By/Filters</button>
-            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
             <ul class="dropdown-menu">
                 <li class="dropdown-header"><strong><i>Sort By</i></strong></li>
-                <li><a href="productspage.php?sort=lowToHigh">Lowest Price</a></li>
-                <li><a href="productspage.php?sort=highToLow">Highest Price</a></li>
-                <li><a href="productspage.php?sort=name(A-Z)">Name (A-Z)</a></li>
-
+                <li><a class="dropdown-item" href="productspage.php?sort=lowToHigh">Lowest Price</a></li>
+                <li><a class="dropdown-item" href="productspage.php?sort=highToLow">Highest Price</a></li>
+                <li><a class="dropdown-item" href="productspage.php?sort=name(A-Z)">Name (A-Z)</a></li>
             </ul>
         </div>
 
         <div class="btn-group">
             <button type="button" class="btn btn-danger">Sort By Brand</button>
-            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
             <ul class="dropdown-menu">
-                <li class="dropdown-header"><strong><i>Filters</i></strong></li>
                 <li class="dropdown-header">Brand</li>
-                <li><a href="productspage.php?filter=apple">Apple</a></li>
-                <li><a href="productspage.php?filter=Samsung">Samsung</a></li>
-                <li><a href="productspage.php?filter=Sony">Sony</a></li>
-                <li><a href="productspage.php?filter=Nokia">Nokia</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=apple">Apple</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=Samsung">Samsung</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=Sony">Sony</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=Nokia">Nokia</a></li>
             </ul>
         </div>
 
         <div class="btn-group">
             <button type="button" class="btn btn-danger">Sort By Price</button>
-            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
             <ul class="dropdown-menu">
-                <li class="dropdown-header"><strong><i>Filters</i></strong></li>
                 <li class="dropdown-header">Price</li>
-                <li><a href="productspage.php?filter=lessThan50">Less than  £50</a></li>
-                <li><a href="productspage.php?filter=lessThan100">Less than £100</a></li>
-                <li><a href="productspage.php?filter=lessThan150">Less than £150</a></li>
-                <li><a href="productspage.php?filter=lessThan200">Less than £200</a></li>
-                <li><a href="productspage.php?filter=lessThan350">Less than £350</a></li>
-                <li><a href="productspage.php?filter=lessThan500">Less than £500</a></li>
-                <li><a href="productspage.php?filter=lessThan600">Less than £600</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=lessThan50">Less than  £50</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=lessThan100">Less than £100</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=lessThan150">Less than £150</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=lessThan200">Less than £200</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=lessThan350">Less than £350</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=lessThan500">Less than £500</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=lessThan600">Less than £600</a></li>
             </ul>
         </div>
 
         <div class="btn-group">
             <button type="button" class="btn btn-danger">Sort By Colour</button>
-            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
             <ul class="dropdown-menu">
-                <li class="dropdown-header"><strong><i>Filters</i></strong></li>
                 <li class="dropdown-header">Colour</li>
-                <li><a href="productspage.php?filter=blue">Blue</a></li>
-                <li><a href="productspage.php?filter=black">Black</a></li>
-                <li><a href="productspage.php?filter=white">White</a></li>
-                <li><a href="productspage.php?filter=grey">Grey</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=blue">Blue</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=black">Black</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=white">White</a></li>
+                <li><a class="dropdown-item" href="productspage.php?filter=grey">Grey</a></li>
             </ul>
         </div>
+    </div>
+    
+    <div style="margin-top:30px;"></div>
 
+    <div class="container-fluid">
+        <div class="row">
+            <?php foreach ($view->ProductspageDataSet as $productData){ ?>
+                <div class="col-sm-3">
+                    <form method="post" action="cart.php?id=<?php echo $productData->getId() ?>">
+                        <img src="images/<?php echo $productData->getImage() ?>" style="height: 150px;" class="center">
+                        <h5 class="text-center"><?php echo $productData->getTitle() ?></h5>
+                        <h5 class="text-center">£<?php echo $productData->getPrice() ?></h5>
+                        <input type="hidden" name="name" value="<?php echo $productData->getTitle() ?>">
+                        <input type="hidden" name="price" value="<?php echo $productData->getPrice() ?>">
+                        <input type="number" name="quantity" value="1" class="form-control">
+                        <?php if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']) { ?>
+                            <input type="submit" name="add_to_cart" class="btn btn-warning btn-block my-2" value="Add To Cart">
+                        <?php } ?>
+                    </form>
+                </div>
+            <?php } ?>
+        </div>
     </div>
 
-<?php foreach ($view->ProductspageDataSet as $productData){ ?>
-<form method="post" action="watchlist.php?action=add&id=<?php echo $productData->getId() ?>">
-    <table class="table table-hover">
-    <tr class="bg-active">
-        <th>ID</th>
-        <th>Image</th>
-        <th>Title</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th></th>
-    </tr>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <?php
+                for($i = 1; $i <= $total_pages; $i++){
+                    echo "<li class='page-item'><a class='page-link' href='productspage.php?page=" . $i . "'>" . $i . "</a></li>";
+            ?>
+            <?php
+                }
+            ?>
+        </ul>
+    </nav>
 
-    <tbody>
-        <tr class="bg-danger">
-            <td width="20%" class="text-info"><?php echo $productData->getId() ?></td>
-            <td width="20%"><img src="images/<?php echo $productData->getImage() ?>" alt="no picture" width="50%"/></td>
-            <td width="20%"><?php echo $productData->getTitle() ?></td>
-            <td width="20%" class="text-danger">£<?php echo $productData->getPrice() ?></td>
-            <td width="20%"><input type="text" name="quantity" class="form-control" value="1" /></td>
-            <input type="hidden" name="hidden_name" value="<?php echo $productData->getTitle() ?>"/>
-            <input type="hidden" name="hidden_price" value="<?php echo $productData->getPrice() ?>"/>
-            <?php if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']) { ?>
-                <td><input type="submit" name="add_to_list" style="margin-top:5px;" class="btn-watch" value="Add to Watch List"/></td>
-            <?php } ?>
-        </tr>
-    </tbody>
-    </table>
-
-
-</form>
-<?php } ?>
-
-    <ul class="pagination justify-content-center">
-        <?php if($page <= 1){?>
-            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li><?php
-        } else {
-            echo '<li><a href="productspage.php?page=' . ($page - 1) . '">Prev</a></li>';
-        } ?>
-        <?php
-        for($pageloop=1;$pageloop<=$number_of_pages;$pageloop++) {
-            echo '<li><a href="productspage.php?page=' . $pageloop . '">' . $pageloop . '</a></li>';
-        }
-        ?>
-        <?php if($page >= $number_of_pages){?>
-            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Next</a></li><?php
-        } else {
-            echo '<li><a href="productspage.php?page=' . ($page + 1) . '">Next</a></li>';
-        } ?>
-
-    </ul>
+    <div class="page-info">
+        Showing  <?php echo $page ?> of <?php echo $total_pages; ?> pages
+    </div>
 
 <?php require('template/footer.phtml') ?>

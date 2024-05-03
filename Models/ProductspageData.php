@@ -1,19 +1,17 @@
 <?php
 
-class ProductspageData {                       // productspage class
+class ProductspageData {
 
     protected $_id,$_Title, $_Image, $_Price, $_Location;
 
-    public function __construct($dbRow) {                   // fetch rows from database
+    public function __construct($dbRow) {
         $this->_id = $dbRow['id'];
         $this->_Title = $dbRow['Title'];
         $this->_Image = $dbRow['Image'];
         $this->_Price = $dbRow['Price'];
-//        $this->_Location = $dbRow['location'];
-
     }
 
-    public function getId() {                       // public methods to return rows
+    public function getId() {
         return $this->_id;
     }
 
@@ -28,12 +26,6 @@ class ProductspageData {                       // productspage class
     public function getPrice() {
         return $this->_Price;
     }
-
-
-//    public function getLocation() {
-//        return $this->_Location;
-//    }
-
 }
 
 

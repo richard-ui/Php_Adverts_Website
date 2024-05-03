@@ -19,7 +19,7 @@ class postAdvertsDataSet {
 
     }
 
-    public function userId($id)
+    public function getPhoneId($id)
     {
         $sqlQuery = "select id from phones WHERE id = '$id'";
         $statement = $this->_dbHandle->prepare($sqlQuery);

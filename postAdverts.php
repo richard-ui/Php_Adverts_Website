@@ -21,17 +21,17 @@ if (isset($_POST['postad'])) {
     $price=$_POST['price'];
     $color=$_POST['colour'];
     $brandname=$_POST['brandname'];
-    $result = $postAdvertsDataSet->userId($advertid);
+    $result = $postAdvertsDataSet->getPhoneId($advertid);
 
     $errors = array();
 
     $uploaddir = 'images/';
     $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
 
-    if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {    // validates image and moves to 'images/' location
-        $filemessage = "File is valid, and was successfully uploaded.\n";  //  if successful image upload
+    if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
+        $filemessage = "File is valid, and was successfully uploaded.\n";
     } else {
-        $filemessage = "Possible file upload attack!\n";            //  if unsuccessful image upload
+        $filemessage = "Possible file upload attack!\n";
     }
 
     if (empty($_POST["advertid"])) {

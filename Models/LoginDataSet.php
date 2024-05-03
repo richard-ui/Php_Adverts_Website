@@ -12,9 +12,15 @@ class LoginDataSet {
     }
 
     public function login($u_name,$u_password){
-
-
         $sqlQuery = "select email from userinfo WHERE email = '$u_name' AND password = '$u_password'";
+        $statement = $this->_dbHandle->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getUserId($u_name){
+        $sqlQuery = "select id from userinfo WHERE email = '$u_name'";
         $statement = $this->_dbHandle->prepare($sqlQuery);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
