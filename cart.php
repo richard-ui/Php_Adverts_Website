@@ -15,8 +15,7 @@ if(isset($_POST['adverts'])) {
 
 if(isset($_POST["add_to_cart"])) {
     if(isset($_SESSION["cart"])) {
-        $session_array_id = array_column($_SESSION["cart"], "id");
-        if(!in_array($_GET["id"], $session_array_id)) {
+        if(!in_array($_GET["id"], array_column($_SESSION["cart"], "item_id"))) {
             $session_array = [
                 "item_id"       => intval($_GET["id"]),
                 "item_name"     => $_POST["name"],
@@ -25,6 +24,10 @@ if(isset($_POST["add_to_cart"])) {
             ];
 
             $_SESSION["cart"][] = $session_array;
+        }
+        else {
+            echo '<script>alert("Item Already Added")</script>';
+            echo '<script>window.location="productspage.php"</script>';
         }
     } else {
         $session_array = [

@@ -10,14 +10,9 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
 
 $view->countProducts = $productspageDataSet->countProducts();
 
-if(isset($_GET['id'])){
-    $ajaxid = $_GET['id'];
-    $view->ProductspageDataSet = $productspageDataSet->fetchAjaxHintID($ajaxid);
-}
-
-if(isset($_POST['searchtext'])) {
-    $searchtext = $_POST['searchtext'];
-}
+// if(isset($_POST['searchtext'])) {
+//     $searchtext = $_POST['searchtext'];
+// }
 
 if (isset($_POST['search'])) {
     $view->ProductspageDataSet = $productspageDataSet->searchProducts($searchtext);
@@ -38,6 +33,6 @@ if(isset($_GET["page"])){
 $start_from = ($page-1) * 12;
 
 $view->ProductspageDataSet = $productspageDataSet->fetchAllProducts($start_from, $num_per_page);
+$queryString = $view->ProductspageDataSet[1];
 
 require_once('Views/productspage.phtml');
-

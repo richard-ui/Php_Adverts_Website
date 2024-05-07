@@ -51,7 +51,7 @@
                             uic.innerHTML = "Suggestions:<br/>";
                             var people = JSON.parse(this.responseText);
                             people.forEach(function (obj) {
-                                uic.innerHTML += "<a href='productspage.php?id=" + obj.id + "'><img src='images/" + obj.image + "'>" +
+                                uic.innerHTML += "<a href='productspage.php?suggestionId=" + obj.id + "'><img src='images/" + obj.image + "'>" +
                                     obj.name + ", Price: £" + obj.price + "</a><br/>";
                             });
                         }
@@ -129,7 +129,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <?php foreach ($view->ProductspageDataSet as $productData){ ?>
+            <?php foreach ($view->ProductspageDataSet[0] as $productData){ ?>
                 <div class="col-sm-3">
                     <form method="post" action="cart.php?id=<?php echo $productData->getId() ?>">
                         <img src="images/<?php echo $productData->getImage() ?>" style="height: 150px;" class="center">
@@ -151,7 +151,8 @@
         <ul class="pagination justify-content-center">
             <?php
                 for($i = 1; $i <= $total_pages; $i++){
-                    echo "<li class='page-item'><a class='page-link' href='productspage.php?page=" . $i . "'>" . $i . "</a></li>";
+                    // echo "<li class='page-item'><a class='page-link' href='productspage.php?" . $queryString . "&page=" . $i . "'>" . $i . "</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='productspage.php?page=" . $i . $queryString . "'>" . $i . "</a></li>";
             ?>
             <?php
                 }

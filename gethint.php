@@ -9,14 +9,14 @@ if(!empty($_GET['q']))
 {
     $q = $_GET['q'];
 
-    $view->ProductspageDataSet = $productspageDataSet->searchtextforAjax($q);
+    $view->ProductspageDataSet = $productspageDataSet->searchProducts($q);
     $array = [];
 
-    foreach ($view->ProductspageDataSet as $productData){
+    foreach ($view->ProductspageDataSet[0] as $productData){
         $array[] = [
-            'id' => $productData->getId(),
+            'id'    => $productData->getId(),
             'image' => $productData->getImage(),
-            'name' => $productData->getTitle(),
+            'name'  => $productData->getTitle(),
             'price' => $productData->getPrice(),
         ];
     }
