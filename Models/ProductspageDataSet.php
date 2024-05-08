@@ -18,6 +18,12 @@ class ProductspageDataSet
         $getFilters = $this->getFilters($sqlQuery);
         $sqlQuery = $getFilters[0];
 
+        if (isset($_POST['search'])) {
+            $searchtext = $_POST['searchtext'];
+            $sqlQuery = $this->searchProductsInput($searchtext);
+            // var_dump($sqlQuery);
+        }
+
         if(isset($_GET['suggestionId'])){
             $ajaxid = $_GET['suggestionId'];
             $sqlQuery = $this->fetchAjaxHintID($ajaxid);
@@ -29,6 +35,7 @@ class ProductspageDataSet
         while ($row = $statement->fetch()) {
             $dataSet[] = new ProductspageData($row);
         }
+        // var_dump(count($dataSet));
         return count($dataSet);
     }
 
@@ -37,6 +44,11 @@ class ProductspageDataSet
         $queryString = "";
         $getFilters = $this->getFilters($sqlQuery, $queryString);
         $sqlQuery = $getFilters[0];
+
+        if (isset($_POST['search'])) {
+            $searchtext = $_POST['searchtext'];
+            $sqlQuery = $this->searchProductsInput($searchtext);
+        }
 
         if(isset($_GET['suggestionId'])){
             $ajaxid = $_GET['suggestionId'];
@@ -52,6 +64,11 @@ class ProductspageDataSet
             $dataSet[] = new ProductspageData($row);
         }
         return [$dataSet, $getFilters[1]];
+    }
+
+    public function searchProductsInput($search) {
+        $sqlQuery = "SELECT * from phones where phones.Title like '%" .  $search . "%'";
+        return $sqlQuery;
     }
     
     public function searchProducts($search) {
@@ -137,6 +154,3 @@ class ProductspageDataSet
     }
 
 }
-        // if (isset($_POST['search'])) {
-        //     $sqlQuery = "SELECT * from phones where phones.Title like '%" .  $_POST['searchtext'] . "%'";
-        // }

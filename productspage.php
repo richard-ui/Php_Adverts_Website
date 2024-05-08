@@ -15,14 +15,15 @@ $view->countProducts = $productspageDataSet->countProducts();
 // }
 
 if (isset($_POST['search'])) {
-    $view->ProductspageDataSet = $productspageDataSet->searchProducts($searchtext);
+    // $searchtext = $_POST['searchtext'];
+    // $view->ProductspageDataSet = $productspageDataSet->searchProducts($searchtext);
 }
 
 $num_per_page = 12;
 
 $count_rows = $view->countProducts;
 
-$total_pages = ceil($count_rows/$num_per_page);
+$total_pages = ceil($count_rows/$num_per_page); // 14 / 12 = 2 pages
 
 if(isset($_GET["page"])){
     $page = $_GET["page"];
@@ -30,9 +31,9 @@ if(isset($_GET["page"])){
     $page = 1;
 }
 
-$start_from = ($page-1) * 12;
+$start_from = ($page-1) * 12; // 0, 12
 
-$view->ProductspageDataSet = $productspageDataSet->fetchAllProducts($start_from, $num_per_page);
+$view->ProductspageDataSet = $productspageDataSet->fetchAllProducts($start_from, $num_per_page);// 0, 12
 $queryString = $view->ProductspageDataSet[1];
 
 require_once('Views/productspage.phtml');
